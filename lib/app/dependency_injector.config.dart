@@ -16,7 +16,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i4;
 import 'package:shared_preferences/shared_preferences.dart' as _i5;
 
-import '../core/data/di/datastore_module.dart' as _i9;
+import '../core/datastore/di/datastore_module.dart' as _i9;
 import '../core/network/di/network_module.dart' as _i8;
 import '../core/network/retrofit/retrofit_network_api.dart' as _i7;
 
