@@ -3,8 +3,6 @@ import 'package:injectable/injectable.dart';
 
 import 'dependency_injector.config.dart';
 
-final getIt = GetIt.instance;
-
 @InjectableInit(
   initializerName: r'$initGetIt', // default
   preferRelativeImports: true, // default
@@ -14,6 +12,6 @@ Future<GetIt> configureDependencies({
   String environment = Environment.dev,
 }) =>
     $initGetIt(
-      getIt,
+      GetIt.instance,
       environment: environment,
     );
