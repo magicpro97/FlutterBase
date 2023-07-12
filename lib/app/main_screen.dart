@@ -2,24 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../generated/l10n.dart';
-import '../feature/feature1/navigation/route.dart';
-import '../feature/feature2/navigation/route.dart';
-import '../feature/feature3/navigation/route.dart';
 
 final _labelMap = {
-  Feature1Route.path: S.current.feature_1,
-  Feature2Route.path: S.current.feature_2,
-  Feature3Route.path: S.current.feature_3,
+  0: S.current.feature_1,
+  1: S.current.feature_2,
+  2: S.current.feature_3,
 };
 
 class MainScreen extends StatelessWidget {
   const MainScreen({
     super.key,
-    required this.location,
     required this.navigationShell,
   });
 
-  final String location;
   final StatefulNavigationShell navigationShell;
 
   void _onTap(BuildContext context, int index) {
@@ -31,7 +26,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(_labelMap[location] ?? ''),
+        title: Text(_labelMap[navigationShell.currentIndex] ?? ''),
       ),
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
