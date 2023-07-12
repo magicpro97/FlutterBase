@@ -8,11 +8,15 @@ final class Feature3Route {
   static const path = "/feature3";
   static const name = "feature3";
 
-  static final route = GoRoute(
-    path: path,
-    name: name,
-    pageBuilder: (_, __) => const NoTransitionPage(
-      child: Feature3Screen(),
-    ),
+  static final route = StatefulShellBranch(
+    routes: [
+      GoRoute(
+        path: path,
+        name: name,
+        pageBuilder: (_, state) => const NoTransitionPage(
+          child: Feature3Screen(),
+        ),
+      ),
+    ],
   );
 }

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../feature/feature1/navigation/route.dart';
 import '../../feature/feature2/navigation/route.dart';
 import '../../feature/feature3/navigation/route.dart';
+import '../../feature/signin/navigation/route.dart';
 import '../../feature/splash/navigation/route.dart';
 import '../main_screen.dart';
 
@@ -12,20 +13,15 @@ final class AppRouter {
     debugLabel: 'root',
   );
 
-  static final _shellNavigatorKey = GlobalKey<NavigatorState>(
-    debugLabel: 'shell',
-  );
-
-  static final _mainRoute = ShellRoute(
-    navigatorKey: _shellNavigatorKey,
-    routes: [
+  static final _mainRoute = StatefulShellRoute.indexedStack(
+    branches: [
       Feature1Route.route(_rootNavigatorKey),
       Feature2Route.route,
       Feature3Route.route,
     ],
-    builder: (_, state, widget) => MainScreen(
+    builder: (_, state, navigationShell) => MainScreen(
       location: state.location,
-      child: widget,
+      navigationShell: navigationShell,
     ),
   );
 
@@ -33,6 +29,7 @@ final class AppRouter {
     navigatorKey: _rootNavigatorKey,
     routes: [
       SplashRoute.route,
+      SignInRoute.route,
       _mainRoute,
     ],
   );

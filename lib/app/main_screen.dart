@@ -6,42 +6,24 @@ import '../feature/feature1/navigation/route.dart';
 import '../feature/feature2/navigation/route.dart';
 import '../feature/feature3/navigation/route.dart';
 
-class MainScreen extends StatefulWidget {
+final _labelMap = {
+  Feature1Route.path: S.current.feature_1,
+  Feature2Route.path: S.current.feature_2,
+  Feature3Route.path: S.current.feature_3,
+};
+
+class MainScreen extends StatelessWidget {
   const MainScreen({
     super.key,
     required this.location,
-    required this.child,
+    required this.navigationShell,
   });
 
   final String location;
-  final Widget child;
+  final StatefulNavigationShell navigationShell;
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  var _currentIndex = 0;
-  final _navigation = [
-    Feature1Route.name,
-    Feature2Route.name,
-    Feature3Route.name,
-  ];
-
-  final _labelMap = {
-    Feature1Route.path: S.current.feature_1,
-    Feature2Route.path: S.current.feature_2,
-    Feature3Route.path: S.current.feature_3,
-  };
-
-  void _onTap(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-
-    context.goNamed(
-      _navigation[index],
-    );
+  void _onTap(BuildContext context, int index) {
+    navigationShell.goBranch(index);
   }
 
   @override
@@ -49,14 +31,12 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(_labelMap[widget.location] ?? ''),
+        title: Text(_labelMap[location] ?? ''),
       ),
-      body: Center(
-        child: widget.child,
-      ),
+      body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTap,
+        currentIndex: navigationShell.currentIndex,
+        onTap: (index) => _onTap(context, index),
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.home),

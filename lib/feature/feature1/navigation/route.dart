@@ -13,21 +13,25 @@ final class Feature1Route {
   static const _feature1childPath = "child";
   static const feature1childName = "feature1child";
 
-  static GoRoute route(
+  static StatefulShellBranch route(
     GlobalKey<NavigatorState> rootNavigatorKey,
   ) =>
-      GoRoute(
-        path: path,
-        name: name,
-        pageBuilder: (_, state) => const NoTransitionPage(
-          child: Feature1Screen(),
-        ),
+      StatefulShellBranch(
         routes: [
           GoRoute(
-            path: _feature1childPath,
-            name: feature1childName,
-            parentNavigatorKey: rootNavigatorKey,
-            builder: (_, __) => const Feature1ChildScreen(),
+            path: path,
+            name: name,
+            pageBuilder: (_, state) => const NoTransitionPage(
+              child: Feature1Screen(),
+            ),
+            routes: [
+              GoRoute(
+                path: _feature1childPath,
+                name: feature1childName,
+                parentNavigatorKey: rootNavigatorKey,
+                builder: (_, __) => const Feature1ChildScreen(),
+              ),
+            ],
           ),
         ],
       );

@@ -8,11 +8,15 @@ final class Feature2Route {
   static const path = "/feature2";
   static const name = "feature2";
 
-  static final route = GoRoute(
-    path: path,
-    name: name,
-    pageBuilder: (_, __) => const NoTransitionPage(
-      child: Feature2Screen(),
-    ),
+  static final route = StatefulShellBranch(
+    routes: [
+      GoRoute(
+        path: path,
+        name: name,
+        pageBuilder: (_, state) => const NoTransitionPage(
+          child: Feature2Screen(),
+        ),
+      ),
+    ],
   );
 }
